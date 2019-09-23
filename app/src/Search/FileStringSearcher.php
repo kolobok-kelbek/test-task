@@ -47,11 +47,11 @@ final class FileStringSearcher implements StringSearcher
             /** @var int[] $positions */
             $positions = $this->worker->work(new InputData($searchString, $line));
 
+            $count++;
+
             if (empty($positions)) {
                 continue;
             }
-
-            $count++;
 
             $resultDataList[] = new ResultData($count, $positions);
         }

@@ -27,7 +27,7 @@ final class StringEntranceWorker implements Worker
         while (true) {
             $pos = stripos($data->getLine(), $data->getSearchText(), $pos);
 
-            if (!$pos) {
+            if (false === $pos) {
                 break;
             }
 
