@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+set_time_limit(0);
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use kelbek\DI\Container;
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+
+$container = Container::getInstance();
+
+$application->add($container->get('search.command'));
+
+$application->run();

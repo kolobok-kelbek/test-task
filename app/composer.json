@@ -1,0 +1,22 @@
+{
+    "name": "kelbek/test",
+    "type": "library",
+    "authors": [
+        {
+            "name": "kolobok kelbek",
+            "email": "dev_kelbek@mail.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "kelbek\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.3",
+        "symfony/console": "^4.3",
+        "symfony/dependency-injection": "^4.3",
+        "symfony/config": "^4.3",
+        "symfony/yaml": "^4.3"
+    }
+}

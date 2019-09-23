@@ -1,0 +1,27 @@
+version: "3.6"
+services:
+
+  db:
+    image: postgres:latest
+    container_name: test-postgres
+    environment:
+      - POSTGRES_USER=kelbek
+      - POSTGRES_PASSWORD=qwerty
+      - POSTGRES_DB=test
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  php:
+    build: docker/php-fpm
+    container_name: test-php-fpm
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+    environment:
+      PHP_IDE_CONFIG: "serverName=Docker"
+
+volumes:
+  dbdata:
+

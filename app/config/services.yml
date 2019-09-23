@@ -1,0 +1,26 @@
+parameters:
+    file_reader.max_file_size: 2048
+    file_reader.permissible_file_extensions:
+      - 'text/plain'
+
+services:
+  file_reader:
+    class: kelbek\FileReader
+    arguments:
+      - '%file_reader.max_file_size%'
+      - '%file_reader.permissible_file_extensions%'
+
+  string_entrance_worker:
+    class: kelbek\Searcher\Worker\StringEntranceWorker
+
+  file_string_searcher:
+    class: kelbek\Search\FileStringSearcher
+    arguments:
+      - '@file_reader'
+      - '@string_entrance_worker'
+
+  search.command:
+    class: kelbek\Command\SearchCommand
+    arguments:
+      - '@file_string_searcher'
+      - 'search'
