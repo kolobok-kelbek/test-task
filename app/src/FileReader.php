@@ -61,12 +61,8 @@ final class FileReader implements Reader
 
         $buffer = fgets($this->handle, $this->maxFileSize);
 
-        if (!$buffer) {
+        if (!$buffer || feof($this->handle)) {
             return null;
-        }
-
-        if (feof($this->handle)) {
-            throw new ReadException('Error reading file.');
         }
 
         return $buffer;
