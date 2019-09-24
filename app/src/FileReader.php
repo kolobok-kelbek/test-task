@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace kelbek;
 
 use Exception;
-use kelbek\Exception\{FileNotFoundException, MimeTypeNotSupportedException, ReadException};
-use function file_exists, fopen, fgets, feof, fclose, mime_content_type, in_array;
+use kelbek\Exception\{FileNotFoundException, InvalidFileSizeException, MimeTypeNotSupportedException, ReadException};
 
 final class FileReader implements Reader
 {
@@ -27,6 +26,7 @@ final class FileReader implements Reader
      * @throws FileNotFoundException
      * @throws ReadException
      * @throws MimeTypeNotSupportedException
+     * @throws InvalidFileSizeException
      */
     public function open(string $filename): void
     {
@@ -34,10 +34,19 @@ final class FileReader implements Reader
             throw new FileNotFoundException("File {$filename} not found.");
         }
 
-        if (!empty($this->permissibleFileExtension)) {
+        $fileSize = filesize($filename);
+
+        if ($fileSize > $this->maxFileSize) {
+            throw new InvalidFileSizeException(
+                "A file with a size of no more than {$this->maxFileSize} "
+                . "bytes is allowed, {$fileSize} bytes were received"
+            );
+        }
+
+        if (!empty($this->permissibleFileExtensions)) {
             $mimeType = mime_content_type($filename);
 
-            if (!in_array($mimeType, $this->permissibleFileExtension)) {
+            if (!in_array($mimeType, $this->permissibleFileExtensions)) {
                 throw new MimeTypeNotSupportedException("File with {$mimeType} mime types not supported.");
             }
         }
@@ -51,7 +60,6 @@ final class FileReader implements Reader
 
     /**
      * @return string|null
-     * @throws ReadException
      */
     public function readLine(): ?string
     {
@@ -59,7 +67,7 @@ final class FileReader implements Reader
             return null;
         }
 
-        $buffer = fgets($this->handle, $this->maxFileSize);
+        $buffer = fgets($this->handle);
 
         if (!$buffer || feof($this->handle)) {
             return null;

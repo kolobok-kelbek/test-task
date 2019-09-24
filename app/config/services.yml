@@ -11,7 +11,7 @@ services:
       - '%file_reader.permissible_file_extensions%'
 
   string_entrance_worker:
-    class: kelbek\Searcher\Worker\StringEntranceWorker
+    class: kelbek\Search\Worker\StringEntranceWorker
 
   file_string_searcher:
     class: kelbek\Search\FileStringSearcher

@@ -6,7 +6,7 @@ namespace kelbek\Search;
 
 use kelbek\Reader;
 use kelbek\Search\FileStringSearcher\Entity\ResultData;
-use kelbek\Searcher\Worker\StringEntranceWorker\Entity\InputData;
+use kelbek\Search\Worker\StringEntranceWorker\Entity\InputData;
 
 final class FileStringSearcher implements StringSearcher
 {

@@ -6,6 +6,6 @@ namespace kelbek\Exception;
 
 use Exception;
 
-class FileNotFoundException extends Exception
+class InvalidFileSizeException extends Exception
 {
 }

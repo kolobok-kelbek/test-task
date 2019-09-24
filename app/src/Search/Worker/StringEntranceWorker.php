@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace kelbek\Searcher\Worker;
+namespace kelbek\Search\Worker;
 
 use InvalidArgumentException;
 use kelbek\Search\Worker;
-use kelbek\Searcher\Worker\StringEntranceWorker\Entity\InputData;
-use function stripos;
+use kelbek\Search\Worker\StringEntranceWorker\Entity\InputData;
 
 final class StringEntranceWorker implements Worker
 {

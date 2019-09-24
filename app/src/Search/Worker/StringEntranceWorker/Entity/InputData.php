@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace kelbek\Searcher\Worker\StringEntranceWorker\Entity;
+namespace kelbek\Search\Worker\StringEntranceWorker\Entity;
 
 final class InputData
 {
